@@ -8,12 +8,9 @@ import { Category } from '../category';
 })
 
 export class FirstComponentComponent  {
-
-  constructor() { }
-
   name: string = 'Apple';
   description: string = "Tasty and red";
   price: number = 5;
-  category = Category.Products 
-  isAvailable: boolean = true
+  category = Category.Products;
+  isAvailable: boolean = true;
 }
