@@ -8,23 +8,23 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
+  products:ProductModel[] = []
+  name:string = '';
 
   constructor(private productService : ProductsService) { }
+
   ngOnInit(): void {
     this.products = this.productService.getProducts();
   }
 
-  products:ProductModel[] = []
-
-  name:string = '';
-  filter(){
+  filter(): void {
     if(this.name == ''){
       this.products = this.productService.getProducts();
     }
     else{
       this.products = this.productService.filterByName(this.name);
     }
-    
+
   }
 
 }

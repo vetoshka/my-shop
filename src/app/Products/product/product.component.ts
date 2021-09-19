@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-product',
@@ -9,8 +9,8 @@ export class ProductComponentComponent {
 
   constructor() { }
 
-  onAddToCart(){
-      console.log("product was bought")
+  onAddToCart(): void {
+      console.log("product was bought");
   }
 
 }

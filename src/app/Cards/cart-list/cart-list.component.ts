@@ -8,15 +8,15 @@ import { CartService } from '../cart.service';
   styleUrls: ['./cart-list.component.scss']
 })
 export class CartListComponent implements OnInit {
+  products: ProductModel[] = [];
 
   constructor(private cardService:CartService) { }
-  products: ProductModel[] = [];
-  ngOnInit() {
-    this.products = this.cardService.getProducts()
+
+  ngOnInit(): void {
+    this.products = this.cardService.getProducts();
   }
 
-  trackByName(index: number, item: ProductModel): string 
-  { 
-    return item.name; 
+  trackByName(index: number, item: ProductModel): string {
+    return item.name;
   }
 }

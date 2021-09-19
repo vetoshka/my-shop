@@ -6,12 +6,12 @@ import { ProductModel } from '../Products/product-model';
   providedIn: 'root'
 })
 export class CartService {
-
-  constructor() { }
+  // предполагаю, что модель должна быть другой, например, дополнительно содержать количество товара
   private products: ProductModel[] = [
     {name:'First', description :'Des1', price : 10 , category : Category.Products, isAvailable:true },
   ];
-  getProducts(){
+
+  getProducts(): ProductModel[] {
     return  this.products;
   }
 }
