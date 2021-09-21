@@ -1,14 +1,8 @@
-<label for="search-text">Search Text</label> <br>
-<input [(ngModel)]="name" placeholder="Enter text to search"
-  autofocus>
-  <!-- Используйте один стиль кавычек -->
-<button (click) = "filter()"> Filter </button>
-<li *ngFor="let product of products">
-    <p>Name: {{product.name}}</p>
-    <p>Description: {{product.description}}</p>
-    <p>Price: {{product.price}}</p>
-    <p>Category: {{product.category}}</p>
-    <p>Available: {{product.isAvailable}}</p>
-    <app-product></app-product>
-  </li>
-
+<div class='product-container'>
+  <label for='search-text'>Search Text</label> <br>
+  <input [(ngModel)]="name" placeholder="Enter text to search" autofocus>
+  <button (click)='filter()'> Filter </button>
+  <app-product *ngFor='let product of products' [product]='product' (addToCart)='onAddToCart($event)'
+    (likeProduct)='onLikeProduct($event)' (dislikeProduct)='onDislikeProduct($event)'>
+  </app-product>
+</div>

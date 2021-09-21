@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Category } from '../category';
-import { ProductModel } from '../Products/product-model';
+import { CartModel } from '../models/cart.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  // предполагаю, что модель должна быть другой, например, дополнительно содержать количество товара
-  private products: ProductModel[] = [
-    {name:'First', description :'Des1', price : 10 , category : Category.Products, isAvailable:true },
-  ];
+  private cartProducts: CartModel[] = [];
 
-  getProducts(): ProductModel[] {
-    return  this.products;
+  getProducts(): CartModel[] {
+    return this.cartProducts;
+  }
+
+  getProductsCount(): number {
+    return this.cartProducts.reduce((sum, x) => sum + x.quantity, 0);
+  }
+  getProductSummary(): number {
+    return this.cartProducts.reduce((sum, x) => sum + x.price * x.quantity, 0);
+  }
+
+  deleteProductFromCart(product: CartModel): void {
+    this.cartProducts = this.cartProducts.filter(x => x.name != product.name);
   }
 }
