@@ -14,7 +14,11 @@ export class CartListComponent implements OnInit, OnDestroy {
   products: CartModel[] = [];
 
   private sub!: Subscription;
-  constructor(private productService: ProductsService, private cartService: CartService) { }
+
+  constructor(
+    private productService: ProductsService,
+    private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
     this.products = this.cartService.getProducts();
@@ -23,19 +27,10 @@ export class CartListComponent implements OnInit, OnDestroy {
     );
   }
 
-
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-  private addProduct(product: CartModel) {
-    let cartProduct = this.products.find(x => x.name === product.name);
-    if (!cartProduct) {
-      this.cartService.getProducts().push(product);
-    } else {
-      cartProduct.quantity += 1
-    }
 
-  }
   trackByName(index: number, item: ProductModel): string {
     return item.name;
   }
@@ -50,5 +45,15 @@ export class CartListComponent implements OnInit, OnDestroy {
   onDeleteFromCart(product: CartModel): void {
     this.cartService.deleteProductFromCart(product);
     this.products = this.cartService.getProducts();
+  }
+
+  private addProduct(product: CartModel) {
+    let cartProduct = this.products.find(x => x.name === product.name);
+    if (!cartProduct) {
+      this.cartService.getProducts().push(product);
+    } else {
+      cartProduct.quantity += 1
+    }
+
   }
 }
