@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartModule } from 'src/app/Cards/cart.module';
 import { CartService } from 'src/app/Cards/cart.service';
-import { Category } from 'src/app/category';
+import { Category } from 'src/app/models/category';
 import { CartModel } from 'src/app/models/cart.model';
 import { ProductModel } from '../../models/product.model';
 import { ProductsService } from '../products.service';
@@ -48,6 +48,7 @@ export class ProductListComponent implements OnInit {
     this.productService.likeProduct(product);
     console.log(this.productService.getLikedProducts());
   }
+  
   onDislikeProduct(product: ProductModel): void {
     this.productService.dislikeProduct(product);
     console.log(this.productService.getLikedProducts());
