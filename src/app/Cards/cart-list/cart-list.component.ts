@@ -36,14 +36,14 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   getProductsCount(): number {
-    return this.cartService.getProductsCount();
+    return this.cartService.totalQuantity;
   }
   getProductSummary(): number {
-    return this.cartService.getProductSummary();
+    return this.cartService.totalSum;
   }
 
   onDeleteFromCart(product: CartModel): void {
-    this.cartService.deleteProductFromCart(product);
+    this.cartService.removeProduct(product);
     this.products = this.cartService.getProducts();
   }
 
