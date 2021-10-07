@@ -30,3 +30,18 @@
 - SharedModule.
 - HighlightDirective.
 - AddLikedItem.
+
+## [1.2.0] - 2021-10-07
+### Added
+
+- ConfigOptionsService.
+- ConstantsService.
+- GeneratorService.
+- GeneratorFactory.
+- generatedString.
+- LocalStorageService.
+- FirstComponent.
+- ScaleDirective.
+### Changed
+
+- CartService 
