@@ -14,6 +14,10 @@ export class CartListComponent implements OnInit, OnDestroy {
   products: CartModel[] = [];
 
   private sub!: Subscription;
+  
+  selectedSortOptions: string[] = [];
+  isAsc:boolean = true;
+  sortOptions: string[] = ['price', 'name', 'quantity']
 
   constructor(
     private productService: ProductsService,

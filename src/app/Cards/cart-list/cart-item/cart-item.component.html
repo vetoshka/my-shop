@@ -1,8 +1,8 @@
 <div class='panel panel-default'>
     <div appHighlight  class='panel-body'>
         <ul>
-            <p appScale scale="30">Name: {{product.name}}</p>
-            <p>Price: {{product.price}}</p>
+            <p appScale scale="30">Name: {{product.name  | uppercase }}</p>
+            <p>Price: {{product.price | currency}}</p>
         </ul>
         <button class='btn btn-primary' (click)="onDeleteFromCart()"> Delete</button>
         <button (click)='onIncrease()' [disabled]='!product.isAvailable'> + </button>

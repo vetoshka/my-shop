@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { Category } from '../models/category';
 import { CartModel } from '../models/cart.model';
 import { ProductModel } from '../models/product.model';
@@ -12,8 +12,10 @@ export class ProductsService {
 
   private products: ProductModel[] = [
     { name: 'First', description: 'Des1', price: 10, category: Category.Products, isAvailable: true },
-    { name: 'Second', description: 'Des2', price: 10, category: Category.Clothes, isAvailable: true },
-    { name: 'Toy', description: 'Des3', price: 10, category: Category.Toys, isAvailable: false },
+    { name: 'Second', description: 'Des2', price: 5, category: Category.Clothes, isAvailable: true },
+    { name: 'AA', description: 'Des2', price: 5, category: Category.Clothes, isAvailable: true },
+    { name: 'vv', description: 'Des2', price: 5, category: Category.Clothes, isAvailable: true },
+    { name: 'Toy', description: 'Des3', price: 5, category: Category.Toys, isAvailable: false },
   ];
 
   likedProducts: ProductModel[] = []
@@ -23,8 +25,8 @@ export class ProductsService {
     this.channel.next(data);
   }
 
-  getProducts(): ProductModel[] {
-    return this.products;
+  getProducts(): Observable<ProductModel[]> {
+    return of(this.products);
   }
 
   getLikedProducts(): ProductModel[] {

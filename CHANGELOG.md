@@ -45,3 +45,12 @@
 ### Changed
 
 - CartService 
+
+
+## [1.3.0] - 2021-10-14
+### Added
+
+- OrderByPipe.
+- currency and uppercase pipe at product.component.html and cart-item.component.html
+- async pipe at product-list.component.html.
+- OrderByPipe at CartListComponent.

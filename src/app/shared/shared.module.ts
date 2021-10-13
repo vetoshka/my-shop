@@ -2,17 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HighlightDirective } from './highlight.directive';
 import { ScaleDirective } from './scale.directive';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     HighlightDirective,
-    ScaleDirective
+    ScaleDirective,
+    OrderByPipe
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
-  exports: [HighlightDirective , ScaleDirective]
+  exports: [HighlightDirective , ScaleDirective, OrderByPipe,CommonModule,FormsModule]
 })
 export class SharedModule { }

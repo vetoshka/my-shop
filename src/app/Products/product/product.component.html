@@ -1,12 +1,12 @@
 <div [style.background-color]="product.isAvailable ? 'none' : '#DEDEDE' " class="panel panel-default">
-    <div class="panel-heading">{{product.name}}</div>
+    <div class="panel-heading">{{product.name | uppercase  }}</div>
     <div class="panel-body">
         <button class="heart" (click)="onLikeProduct()" [ngClass]="activeHeart ? 'activeHeart' : 'heart'"></button>
         <ul>
             <p>Description: {{product.description}}</p>
-            <p>Price: {{product.price}}</p>
-            <p>Category: {{product.category}}</p>
-            <p>Available: {{product.isAvailable}}</p>
+            <p>Price: {{product.price | currency}}</p>
+            <p>Category: {{product.category }}</p>
+            <p>Available: {{product.isAvailable }}</p>
         </ul>
         <button class="btn btn-primary" [disabled]="!product.isAvailable" (click)="onAddToCart()">Buy</button>
     </div>
