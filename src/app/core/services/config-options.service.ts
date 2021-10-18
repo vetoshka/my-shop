@@ -9,11 +9,12 @@ export class ConfigOptionsService {
   configModel!:ConfigModel;
 
   constructor() { }
+
   setConfig(config:Partial<ConfigModel>):void{
     this.configModel =  {...this.configModel, ...config};
   }
 
-  getConfig() {
+  getConfig(): ConfigModel {
     return this.configModel;
   }
 }
