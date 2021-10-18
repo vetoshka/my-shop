@@ -13,12 +13,14 @@ export class CartItemComponent {
 
   @Output()
   deleteFromCart: EventEmitter<CartModel> = new EventEmitter<CartModel>();
-  
+
 
   onDeleteFromCart(): void {
     console.log(this.product)
     this.deleteFromCart.emit(this.product);
   }
+  // this.product - это инпут, не стоит его тут менять,
+  // лучше создать аутпут
   onIncrease(): void {
     this.product.quantity++;
   }
