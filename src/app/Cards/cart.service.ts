@@ -1,4 +1,5 @@
 import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { shopLocalStorage } from '../core/services/local-storage.service';
 import { CartModel } from '../models/cart.model';
 import { ProductModel } from '../models/product.model';
 
@@ -12,7 +13,9 @@ export class CartService{
   totalSum!: number;
 
   getProducts(): CartModel[] {
-    return this.cartProducts;
+     let storageData = JSON.parse(shopLocalStorage.getData('cartItems')) ;
+     if(storageData) this.cartProducts = storageData;
+     return this.cartProducts;
   }
   addProduct(product: ProductModel, quantity: number = 1): void {
     let cardProduct = { ...product, quantity };
@@ -25,11 +28,11 @@ export class CartService{
     this.updateCartData();
   }
 
-  increaseQuantity(product: CartModel, quantity: number): void {
+  increaseQuantity(product: CartModel, quantity: number = 1): void {
     this.changeQuantity(product, quantity)
   }
 
-  decreaseQuantity(product: CartModel, quantity: number): void {
+  decreaseQuantity(product: CartModel, quantity: number = 1): void {
     this.changeQuantity(product, -quantity)
   }
 
@@ -41,6 +44,8 @@ export class CartService{
   private updateCartData(){
       this.totalQuantity = this.cartProducts.reduce((sum, x) => sum + x.quantity, 0);
       this.totalSum = this.cartProducts.reduce((sum, x) => sum + x.price * x.quantity, 0);
+      console.log("add")
+      shopLocalStorage.setData('cartItems', this.cartProducts)
   }
   isEmptyCart():boolean{
     return !this.cartProducts.length;

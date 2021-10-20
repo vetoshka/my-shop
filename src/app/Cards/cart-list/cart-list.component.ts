@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartModel } from 'src/app/models/cart.model';
 import { ProductModel } from 'src/app/models/product.model';
@@ -10,31 +11,30 @@ import { CartService } from '../cart.service';
   templateUrl: './cart-list.component.html',
   styleUrls: ['./cart-list.component.scss']
 })
-export class CartListComponent implements OnInit, OnDestroy {
+export class CartListComponent implements OnInit {
   products: CartModel[] = [];
 
-  private sub!: Subscription;
-  
+
   selectedSortOptions: string[] = [];
-  isAsc:boolean = true;
+  isAsc: boolean = true;
   sortOptions: string[] = ['price', 'name', 'quantity']
 
   constructor(
-    private productService: ProductsService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    
     this.products = this.cartService.getProducts();
-    this.sub = this.productService.channel$.subscribe(
-      data => this.addProduct(data)
-    );
-  }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
   }
-
+  onGoBack(): void {
+    this.router.navigate(['/']);
+  }
+  onProcessOrder(): void{
+    this.router.navigate(['/order']);
+  }
   trackByName(index: number, item: ProductModel): string {
     return item.name;
   }
@@ -50,14 +50,12 @@ export class CartListComponent implements OnInit, OnDestroy {
     this.cartService.removeProduct(product);
     this.products = this.cartService.getProducts();
   }
-
-  private addProduct(product: CartModel) {
-    let cartProduct = this.products.find(x => x.name === product.name);
-    if (!cartProduct) {
-      this.cartService.getProducts().push(product);
-    } else {
-      cartProduct.quantity += 1
-    }
-
+  onIncrease(product: CartModel): void {
+    this.cartService.increaseQuantity(product);
+    this.products = this.cartService.getProducts();
+  }
+  onDecrease(product: CartModel): void {
+    this.cartService.decreaseQuantity(product);
+    this.products = this.cartService.getProducts();
   }
 }

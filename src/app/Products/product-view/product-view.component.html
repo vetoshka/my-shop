@@ -1,0 +1,12 @@
+<div class="panel-heading">{{product.name | uppercase }}</div>
+<div class="panel-body">
+    <ul>
+        <p>Price: {{product.price | currency}}</p>
+        <p>Description: {{product.description }}</p>
+        <p>Category: {{product.category }}</p>
+        <p>Available: {{product.isAvailable }}</p>
+    </ul>
+    <button class="btn btn-primary"  (click)="onAddToCart()">Buy</button>
+    <button type="button" class="btn btn-primary" (click)="onGoBack()">Back
+    </button>
+</div>

@@ -54,3 +54,20 @@
 - currency and uppercase pipe at product.component.html and cart-item.component.html
 - async pipe at product-list.component.html.
 - OrderByPipe at CartListComponent.
+
+## [1.4.0] - 2021-10-21
+### Added
+
+- AdminDashboardComponent,LoginComponent,ProductFormComponent , ProductViewComponent, ProductsComponent, UserComponent
+- AdminGuard, CanResolveGuard, AuthGuard, CanDeactivateGuard , OrderGuard
+- AdminRouterModule , ProductRouterModule
+- AdminModule, LayoutModule
+- CanDeactivateInterface
+- AuthService, DialogService,UserArrayService
+- UserModel
+
+### Changed
+
+- CartItemComponent , CartListComponent , ProductComponent, ProductListComponent
+- CartService,ProductService
+- AppRoutingModule, appComponent.html

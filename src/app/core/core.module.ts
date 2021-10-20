@@ -5,6 +5,7 @@ import { constantsService } from './services/constants.service';
 import { generatedString, GeneratorFactory } from './services/generator.factory';
 import { GeneratorService } from './services/generator.service';
 import { LocalStorageService, shopLocalStorage } from './services/local-storage.service';
+import { AuthGuard } from './guards/auth.guard';
 
 
 

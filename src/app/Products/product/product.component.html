@@ -3,11 +3,15 @@
     <div class="panel-body">
         <button class="heart" (click)="onLikeProduct()" [ngClass]="activeHeart ? 'activeHeart' : 'heart'"></button>
         <ul>
-            <p>Description: {{product.description}}</p>
             <p>Price: {{product.price | currency}}</p>
-            <p>Category: {{product.category }}</p>
             <p>Available: {{product.isAvailable }}</p>
         </ul>
         <button class="btn btn-primary" [disabled]="!product.isAvailable" (click)="onAddToCart()">Buy</button>
+        <button class="btn" [disabled]="!product.isAvailable" (click)="onView()">
+            Details
+        </button>
+        <button *ngIf='authService.isAdmin' class="btn btn-warning btn-sm" (click)="onEditProduct()">
+            Edit
+        </button>
     </div>
 </div>

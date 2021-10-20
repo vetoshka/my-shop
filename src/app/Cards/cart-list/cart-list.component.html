@@ -1,5 +1,5 @@
 <div class='panel panel-default'>
-    <div class='panel-heading'>Card</div>
+    <div class='panel-heading'>Cart</div>
     <div class='panel-body'>
         <select [(ngModel)]="selectedSortOptions" multiple>
             <option *ngFor="let opt of sortOptions" [ngValue]="opt">{{opt}}</option>
@@ -13,13 +13,14 @@
             <br>
             Total: {{getProductSummary()}}
         </div>
-        <app-cart-item *ngFor='let product of products | orderBy: selectedSortOptions : isAsc' [product]='product ' (deleteFromCart)='onDeleteFromCart($event)'>
-        </app-cart-item>
-
-        <h2>Selected:</h2>
-<ul>
-    <li *ngFor="let selected of selectedSortOptions">{{selected}}</li>
-</ul>
-
+        <app-cart-item *ngFor='let product of products | orderBy: selectedSortOptions : isAsc' [product]='product ' 
+            (deleteFromCart)='onDeleteFromCart($event)'
+            (increaseProductCount)='onIncrease($event)'
+            (decreaseProductCount)='onDecrease($event)'></app-cart-item>
+        <button type="button" class="btn btn-primary" (click)="onGoBack()">Back
+        </button>
     </div>
+
+    <button type="button" class="btn btn-primary" (click)="onProcessOrder()">Process Order
+    </button>
 </div>

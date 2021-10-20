@@ -1,0 +1,14 @@
+<h2>LOGIN</h2>
+<p>
+    <button class="btn btn-primary" (click)="onLogout()" *ngIf="authService.isLoggedIn; else 
+loginBtn">Logout</button>
+    <ng-template #loginBtn>
+        <form id="user-form" #form="ngForm">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name"
+                    required [(ngModel)]="username">
+            </div>
+            <button class="btn btn-primary" (click)="onLogin()">Login</button>
+        </form>
+    </ng-template>

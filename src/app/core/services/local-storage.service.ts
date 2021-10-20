@@ -5,7 +5,7 @@ export class LocalStorageService {
     localStorage.setItem(key, jsonData)
   }
 
-  getData(key: string) {
+  getData(key: string) : any {
     return localStorage.getItem(key)
   }
 

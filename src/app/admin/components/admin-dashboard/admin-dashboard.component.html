@@ -1,0 +1,18 @@
+<p>admin-dashboard works!</p>
+<div>
+    <ul class="nav navbar-nav">
+      <li routerLinkActive="active">
+        <a [routerLink]= "[{ outlets: { admin: ['products'] } }]" >Products</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]= "[{ outlets: { admin: ['orders'] } }]">Orders</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]= "[{ outlets: { admin: ['product','add'] } }]">Add Product</a>
+      </li>
+    </ul>
+  </div>
+  <router-outlet name="admin">
+</router-outlet>
+<button type="button" class="btn btn-primary" (click)="onGoBack()">Back
+</button>

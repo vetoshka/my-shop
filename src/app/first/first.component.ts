@@ -22,7 +22,7 @@ export class FirstComponent implements OnInit {
     console.log(this.configOptionsService.getConfig());
 
     console.log(this.generatorService.generate(4));
-    this.localStorageService.setData("key",{id:12})
+    shopLocalStorage.setData("key",{id:12})
 
   }
 }

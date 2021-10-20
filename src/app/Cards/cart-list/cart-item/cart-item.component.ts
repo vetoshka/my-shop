@@ -14,20 +14,25 @@ export class CartItemComponent {
   @Output()
   deleteFromCart: EventEmitter<CartModel> = new EventEmitter<CartModel>();
 
+  @Output()
+  increaseProductCount: EventEmitter<CartModel> = new EventEmitter<CartModel>();
+
+  @Output()
+  decreaseProductCount: EventEmitter<CartModel> = new EventEmitter<CartModel>();
 
   onDeleteFromCart(): void {
     console.log(this.product)
     this.deleteFromCart.emit(this.product);
   }
-  // this.product - это инпут, не стоит его тут менять,
-  // лучше создать аутпут
+
   onIncrease(): void {
-    this.product.quantity++;
+    this.increaseProductCount.emit(this.product);
   }
   onDecrease(): void {
     if (this.product.quantity) {
-      this.product.quantity--;
+      this.decreaseProductCount.emit(this.product);
     }
 
   }
+
 }

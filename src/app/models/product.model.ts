@@ -1,5 +1,6 @@
 export interface ProductModel {
-name: string ;
+  id:number;
+  name: string ;
   description: string ;
   price: number ;
   category :string;
