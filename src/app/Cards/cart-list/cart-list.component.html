@@ -5,7 +5,7 @@
             <option *ngFor="let opt of sortOptions" [ngValue]="opt">{{opt}}</option>
         </select>
         <input type="checkbox" [(ngModel)]="isAsc"/> 
-        <div *ngIf='! (products.length > 0)'>
+        <div *ngIf='!getProductsCount()'>
             Empty cart
         </div>
         <div>
@@ -13,7 +13,7 @@
             <br>
             Total: {{getProductSummary()}}
         </div>
-        <app-cart-item *ngFor='let product of products | orderBy: selectedSortOptions : isAsc' [product]='product ' 
+        <app-cart-item *ngFor='let product of products$ | async' [product]='product' 
             (deleteFromCart)='onDeleteFromCart($event)'
             (increaseProductCount)='onIncrease($event)'
             (decreaseProductCount)='onDecrease($event)'></app-cart-item>

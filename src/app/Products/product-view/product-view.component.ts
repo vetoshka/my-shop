@@ -1,12 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ProductsModule } from '../products.module';
 import { map, switchMap } from 'rxjs/operators';
-import { ProductsService } from '../products.service';
 import { ProductModel } from 'src/app/models/product.model';
-import { CartService } from 'src/app/Cards/cart.service';
-import { CartModel } from 'src/app/models/cart.model';
-import { Category } from 'src/app/models/category';
+import { ProductsPromiseService } from '../products-promise.service';
 @Component({
   selector: 'app-product-view',
   templateUrl: './product-view.component.html',
@@ -16,7 +12,7 @@ export class ProductViewComponent implements OnInit {
   product!: ProductModel;
   @Output() addToCart = new EventEmitter<ProductModel>();
   constructor(
-    private productService: ProductsService,
+    private productService: ProductsPromiseService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -29,7 +25,7 @@ export class ProductViewComponent implements OnInit {
     this.route.paramMap
       .pipe(
         switchMap((params: ParamMap) =>
-          this.productService.getProductById(params.get('productID')!)),
+          this.productService.getProduct(params.get('productID')!)),
         map(el => el ? el : {} as ProductModel))
       .subscribe(observer);
   }
@@ -41,5 +37,8 @@ export class ProductViewComponent implements OnInit {
   onGoBack(): void {
     this.router.navigate(['/']);
   }
+
+
+
 
 }

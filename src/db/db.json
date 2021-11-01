@@ -1,0 +1,55 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "First",
+      "description": "Des1",
+      "price": 10,
+      "category": "Products",
+      "isAvailable": "true"
+    },
+    {
+      "id": 2,
+      "name": "Second",
+      "description": "Des2",
+      "price": 5,
+      "category": "Clothes",
+      "isAvailable": true
+    },
+    {
+      "id": 3,
+      "name": "AA",
+      "description": "Des2",
+      "price": 5,
+      "category": "Clothes",
+      "isAvailable": true
+    },
+    {
+      "id": 4,
+      "name": "vv",
+      "description": "Des2",
+      "price": 5,
+      "category": "Clothes",
+      "isAvailable": true
+    },
+    {
+      "id": 5,
+      "name": "Toy",
+      "description": "Des3",
+      "price": 5,
+      "category": "Toys",
+      "isAvailable": false
+    }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "name": "First",
+      "description": "Des1",
+      "price": 10,
+      "category": "Products",
+      "isAvailable": "true",
+      "quantity": 2
+    }
+  ]
+}

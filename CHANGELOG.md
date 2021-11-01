@@ -71,3 +71,15 @@
 - CartItemComponent , CartListComponent , ProductComponent, ProductListComponent
 - CartService,ProductService
 - AppRoutingModule, appComponent.html
+## [1.5.0] - 2021-11-1
+### Added
+
+- TimingInterceptor, AppSettingService
+- SettingModel
+- app setting json, db.json
+- CartObservableService, ProductPromiseService
+
+### Changed
+
+- CartListComponent ,  ProductListComponent
+- app module

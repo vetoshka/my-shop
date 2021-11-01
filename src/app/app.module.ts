@@ -10,6 +10,8 @@ import { CoreModule } from './core/core.module';
 import { UserComponent } from './users/user/user.component';
 import { AdminModule } from './admin/admin.module';
 import { LayoutModule } from './layout/layout.module';
+import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './core/interceptors';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { LayoutModule } from './layout/layout.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CartModule,
     ProductsModule,
     AdminModule,
@@ -27,7 +30,7 @@ import { LayoutModule } from './layout/layout.module';
     LayoutModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

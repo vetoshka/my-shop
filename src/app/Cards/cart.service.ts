@@ -12,22 +12,6 @@ export class CartService{
   totalQuantity!: number;
   totalSum!: number;
 
-  getProducts(): CartModel[] {
-     let storageData = JSON.parse(shopLocalStorage.getData('cartItems')) ;
-     if(storageData) this.cartProducts = storageData;
-     return this.cartProducts;
-  }
-  addProduct(product: ProductModel, quantity: number = 1): void {
-    let cardProduct = { ...product, quantity };
-    this.cartProducts = [...this.cartProducts, cardProduct];
-    this.updateCartData();
-  }
-
-  removeProduct(product: CartModel): void {
-    this.cartProducts = this.cartProducts.filter(x => x.name != product.name);
-    this.updateCartData();
-  }
-
   increaseQuantity(product: CartModel, quantity: number = 1): void {
     this.changeQuantity(product, quantity)
   }
@@ -35,12 +19,6 @@ export class CartService{
   decreaseQuantity(product: CartModel, quantity: number = 1): void {
     this.changeQuantity(product, -quantity)
   }
-
-  removeAllProducts() {
-    this.cartProducts = [];
-    this.updateCartData();
-  }
-
   private updateCartData(){
       this.totalQuantity = this.cartProducts.reduce((sum, x) => sum + x.quantity, 0);
       this.totalSum = this.cartProducts.reduce((sum, x) => sum + x.price * x.quantity, 0);

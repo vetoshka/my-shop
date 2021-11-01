@@ -14,21 +14,8 @@ const productsPromise = Promise.resolve(products);
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
-  private channel = new Subject<ProductModel>();
-
-
-  
+export class LikedProductsService {
   likedProducts: ProductModel[] = []
-  channel$ = this.channel.asObservable();
-
-  publishData(data: ProductModel): void {
-    this.channel.next(data);
-  }
-
-  getProducts(): Promise<ProductModel[]> {
-    return productsPromise;
-  }
 
   getLikedProducts(): ProductModel[] {
     return this.likedProducts;
@@ -40,10 +27,5 @@ export class ProductsService {
   
   dislikeProduct(product: ProductModel): void {
     this.likedProducts = this.likedProducts.filter(p => p.name != product.name);
-  }
-  getProductById(id:Number | string): Promise<ProductModel | undefined> {
-    return this.getProducts()
-      .then(product => product.find(p => p.id === +id))
-      .catch(() => Promise.reject('Error in getProductById method'));
   }
 }

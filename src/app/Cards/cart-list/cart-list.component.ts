@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CartModel } from 'src/app/models/cart.model';
 import { ProductModel } from 'src/app/models/product.model';
-import { ProductsService } from 'src/app/Products/products.service';
-import { CartService } from '../cart.service';
+import { CartObservableService } from '../cart-observable.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -12,22 +11,22 @@ import { CartService } from '../cart.service';
   styleUrls: ['./cart-list.component.scss']
 })
 export class CartListComponent implements OnInit {
-  products: CartModel[] = [];
 
 
   selectedSortOptions: string[] = [];
   isAsc: boolean = true;
   sortOptions: string[] = ['price', 'name', 'quantity']
-
+  products$!: Observable<Array<CartModel>>;
   constructor(
-    private cartService: CartService,
+    private cartService: CartObservableService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    
-    this.products = this.cartService.getProducts();
-
+    this.getProducts();
+  }
+  getProducts():void{
+    this.products$ = this.cartService.getCartProducts();
   }
   onGoBack(): void {
     this.router.navigate(['/']);
@@ -47,15 +46,14 @@ export class CartListComponent implements OnInit {
   }
 
   onDeleteFromCart(product: CartModel): void {
-    this.cartService.removeProduct(product);
-    this.products = this.cartService.getProducts();
+    this.cartService.deleteCart(product).subscribe(
+      ()=>   this.getProducts()
+    );
   }
   onIncrease(product: CartModel): void {
     this.cartService.increaseQuantity(product);
-    this.products = this.cartService.getProducts();
   }
   onDecrease(product: CartModel): void {
     this.cartService.decreaseQuantity(product);
-    this.products = this.cartService.getProducts();
   }
 }

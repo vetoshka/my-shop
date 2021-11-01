@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppSettingsService } from './core/services/app-settings.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('appTitle')
   appTitle!: ElementRef<HTMLHeadingElement>;
 
-  constructor(router: Router) {
+  constructor(router: Router, private setting: AppSettingsService) {
     const replacer = (key: string, value: any): string =>
       typeof value === 'function' ? value.name : value;
     console.log('Routes: ', JSON.stringify(router.config, replacer, 2));
@@ -19,6 +20,8 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     console.log("ngAfterViewInit")
     this.appTitle.nativeElement.innerHTML = 'Shop';
+    this.setting.getId().subscribe((setting) => console.log("Setting", setting.id));
+
   }
 
 }
