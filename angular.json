@@ -119,6 +119,6 @@
   "defaultProject": "shop",
   "cli": {
     "analytics": false,
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@ngrx/schematics"
   }
 }

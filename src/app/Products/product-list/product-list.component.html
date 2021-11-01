@@ -1,5 +1,7 @@
 <div class='product-container'>
-  <app-product *ngFor='let product of products | async' [product]='product' (addToCart)='onAddToCart($event)' (viewProduct)='onView($event)'
-    (likeProduct)='onLikeProduct($event)' (dislikeProduct)='onDislikeProduct($event)'  (editProduct)="onEditProduct($event)">
+  <p *ngIf="(productsError$ | async) as value">{{value}}</p>
+  <app-product *ngFor='let product of ( products$ | async)' [product]='product'
+    (addToCart)='onAddToCart($event)' (viewProduct)='onView($event)' (likeProduct)='onLikeProduct($event)'
+    (dislikeProduct)='onDislikeProduct($event)' (editProduct)="onEditProduct($event)">
   </app-product>
 </div>

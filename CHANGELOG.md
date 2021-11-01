@@ -83,3 +83,16 @@
 
 - CartListComponent ,  ProductListComponent
 - app module
+
+## [1.6.0] - 2021-11-1
+### Added
+
+- RootStoreModule,ProductStoreModule,
+- ProductActions,ProductEffects
+- ProductsReducer,ProductsSelectors, ProductsState
+- RouterActions,RouterEffects,RouterReducer,RouterSelectors,RouterState
+
+### Changed
+
+- AppModule,ProductModel
+- ProductModule,ProductListComponent,ProductViewComponent, LoginComponent

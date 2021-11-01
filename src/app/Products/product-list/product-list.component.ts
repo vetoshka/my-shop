@@ -1,24 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from 'src/app/Cards/cart.service';
 import { ProductModel } from '../../models/product.model';
 import { Router } from '@angular/router';
 import { ProductsPromiseService } from '../products-promise.service';
 import { LikedProductsService } from '../products.service';
 import { CartObservableService } from 'src/app/Cards/cart-observable.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/core/@ngrx/app.state';
+import { ProductState } from 'src/app/core/@ngrx/products/products.state';
+import { Observable } from 'rxjs';
+import * as ProductAction from 'src/app/core/@ngrx/products/products.actions';
+import { selectProductsData, selectProductsError, selectProductsState } from 'src/app/core/@ngrx/products/products.selectors';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
+
+
+
 export class ProductListComponent implements OnInit {
-  products!: Promise<ProductModel[]>;
+    ;
   name: string = '';
 
-  constructor(private productService: ProductsPromiseService, private likedService: LikedProductsService, private cartService: CartObservableService, private router: Router) { }
+  products$!: Observable<ReadonlyArray<ProductModel>>;
+  productsError$!: Observable<Error | string | null>;
+
+
+  constructor(private store: Store<AppState>, private likedService: LikedProductsService, private cartService: CartObservableService, private router: Router) { }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.products$ = this.store.select(selectProductsData);
+    this.productsError$ = this.store.select(selectProductsError);
+   
+    this.store.dispatch(ProductAction.getProducts());
   }
 
   onView(product: ProductModel): void {
@@ -31,11 +46,11 @@ export class ProductListComponent implements OnInit {
     this.cartService.getCartProducts().subscribe(
       (items) => {
         console.log(items.includes(cardProduct))
-        if (items.find(x=>x.id === product.id)) {
-           this.cartService.increaseQuantity(cardProduct, 1); 
-          }else { 
-            this.cartService.createCart(cardProduct).subscribe(); 
-          }
+        if (items.find(x => x.id === product.id)) {
+          this.cartService.increaseQuantity(cardProduct, 1);
+        } else {
+          this.cartService.createCart(cardProduct).subscribe();
+        }
       }
     );
 

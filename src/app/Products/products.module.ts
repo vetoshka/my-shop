@@ -16,6 +16,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
     ProductsComponent,
     ProductViewComponent,
     ProductFormComponent],
+  
   imports: [
     CommonModule,
     FormsModule,

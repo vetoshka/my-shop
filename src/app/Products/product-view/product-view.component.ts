@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/core/@ngrx/app.state';
+import { selectSelectedProductByUrl } from 'src/app/core/@ngrx/products/products.selectors';
 import { ProductModel } from 'src/app/models/product.model';
 import { ProductsPromiseService } from '../products-promise.service';
+import * as RouterActions from 'src/app/core/@ngrx/router/router.actions';
 @Component({
   selector: 'app-product-view',
   templateUrl: './product-view.component.html',
@@ -13,20 +15,14 @@ export class ProductViewComponent implements OnInit {
   @Output() addToCart = new EventEmitter<ProductModel>();
   constructor(
     private productService: ProductsPromiseService,
-    private route: ActivatedRoute,
-    private router: Router
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
     const observer = {
       next: (product: ProductModel) => (this.product = { ...product }),
-      error: (err: any) => console.log(err)
     };
-    this.route.paramMap
-      .pipe(
-        switchMap((params: ParamMap) =>
-          this.productService.getProduct(params.get('productID')!)),
-        map(el => el ? el : {} as ProductModel))
+    this.store.select(selectSelectedProductByUrl)
       .subscribe(observer);
   }
 
@@ -35,7 +31,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   onGoBack(): void {
-    this.router.navigate(['/']);
+    this.store.dispatch(RouterActions.back());
   }
 
 

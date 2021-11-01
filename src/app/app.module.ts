@@ -12,6 +12,10 @@ import { AdminModule } from './admin/admin.module';
 import { LayoutModule } from './layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './core/interceptors';
+import { StoreModule } from '@ngrx/store';
+import { RootStoreModule } from './core/@ngrx/root-store.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import { httpInterceptorProviders } from './core/interceptors';
     CoreModule,
     LayoutModule,
     AppRoutingModule,
+    RootStoreModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
