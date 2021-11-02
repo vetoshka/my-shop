@@ -20,7 +20,7 @@ export class UserArrayService {
           const user = users.find(user => user.firstName === name);
           return user ? of(user) : EMPTY;
         }),
-        catchError(err => throwError('Error in getUser method'))
+        catchError(err => throwError(() => 'Error in getUser method'))
       );
   }
   createUser(user: UserModel): void {
